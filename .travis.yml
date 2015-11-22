@@ -1,0 +1,18 @@
+sudo: required
+
+language: bash
+
+services:
+- docker
+
+install:
+- sudo bash -ex ./.travis.setup_binfmt_misc.sh
+- git clone --depth 1 git://github.com/machinekit/machinekit.git
+
+script:
+- cp build_mk.sh machinekit
+- docker run -v $(pwd)/machinekit:/opt/rootfs/usr/src/machinekit 
+    kinsamanka/mk-qemu-cross
+        proot -b /dev/shm -r /opt/rootfs -q qemu-arm-static 
+        /usr/src/machinekit/build_mk.sh 
+
