@@ -9,4 +9,4 @@ cd /usr/src/machinekit/src
 	--without-xenomai \
 	--without-xenomai-kernel \
 	--without-rtai-kernel
-make
+make -j2
