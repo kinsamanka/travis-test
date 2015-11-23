@@ -11,8 +11,9 @@ make -j2
 useradd mk
 chown mk:mk ../ -R
 make setuid
-service dbus start
-service avahi-daemon start
+
+echo -e "ANNOUNCE_IPV4=0\nANNOUNCE_IPV6=0" >> /usr/src/machinekit/etc/linuxcnc/machinekit.ini
+
 cat >run.sh<<EOF
 #!/bin/sh -ex
 . /usr/src/machinekit/scripts/rip-environment
