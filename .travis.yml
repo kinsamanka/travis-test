@@ -10,5 +10,6 @@ install:
 
 script:
 - docker run --privileged=true 
-    kinsamanka/mkdocker:wheezy-32 /usr/src/machinekit/run.sh
+    -v $(pwd)/machinekit:/opt/rootfs/usr/src/machinekit
+    kinsamanka/mkdocker:wheezy-32 /opt/rootfs/usr/src/machinekit/run.sh
 
