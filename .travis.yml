@@ -4,16 +4,10 @@ services:
 - docker
 
 install:
-- git clone --depth 1 git://github.com/machinekit/machinekit.git
-- cp build_mk_debs.sh runtests_mk.sh machinekit
-- docker pull kinsamanka/mkdocker:wheezy-32
-
-env:
-- CMD=build_mk_debs.sh
-- CMD=runtests_mk.sh
+- docker pull kinsamanka/testing
 
 script:
-- docker run -v $(pwd)/machinekit:/opt/rootfs/usr/src/machinekit 
-    kinsamanka/mkdocker:wheezy-32
-        proot -b /dev/shm -r /opt/rootfs /usr/src/machinekit/${CMD}
+- docker run --privileged=true 
+    kinsamanka/testing
+    /bin/sh -c “echo hello world!”
 
