@@ -6,6 +6,7 @@ services:
 install:
 - git clone --depth 1 git://github.com/machinekit/machinekit.git
 - cp build_mk_debs.sh runtests_mk.sh machinekit
+- docker pull kinsamanka/mkdocker:wheezy-32
 
 env:
 - CMD=build_mk_debs.sh
