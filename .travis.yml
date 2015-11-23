@@ -14,5 +14,5 @@ env:
 script:
 - docker run -v $(pwd)/machinekit:/opt/rootfs/usr/src/machinekit 
     kinsamanka/mkdocker:wheezy-32
-        proot -b /dev/shm -r /opt/rootfs /usr/src/machinekit/{CMD}
+        proot -b /dev/shm -r /opt/rootfs /usr/src/machinekit/${CMD}
 

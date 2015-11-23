@@ -11,6 +11,8 @@ make -j2
 useradd mk
 chown mk:mk ../ -R
 make setuid
+service dbus start
+service avahi-daemon start
 cat >run.sh<<EOF
 #!/bin/sh -ex
 . /usr/src/machinekit/scripts/rip-environment
