@@ -9,5 +9,5 @@ install:
 script:
 - docker run --privileged=true 
     kinsamanka/testing
-    /bin/sh -c “echo hello world!”
+    /bin/sh -c "echo hello world"
 
