@@ -5,11 +5,14 @@ services:
 
 install:
 - git clone --depth 1 git://github.com/machinekit/machinekit.git
-- cp build_mk.sh machinekit
+- cp build_mk_debs.sh runtests_mk.sh machinekit
+
+env:
+- CMD=build_mk_debs.sh
+- CMD=runtests_mk.sh
 
 script:
 - docker run -v $(pwd)/machinekit:/opt/rootfs/usr/src/machinekit 
-    kinsamanka/mk-qemu-cross
-        proot -b /dev/shm -r /opt/rootfs -q qemu-arm-static 
-        /usr/src/machinekit/build_mk.sh 
+    kinsamanka/mkdocker:wheezy-32
+        proot -b /dev/shm -r /opt/rootfs /usr/src/machinekit/{CMD}
 
