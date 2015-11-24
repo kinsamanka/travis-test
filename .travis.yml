@@ -4,12 +4,12 @@ services:
 - docker
 
 install:
-- git clone --depth 1 git://github.com/machinekit/machinekit.git
-- docker pull kinsamanka/mkdocker:wheezy-32
-- cp run.sh build_mk.sh machinekit 
+#- git clone --depth 1 git://github.com/machinekit/machinekit.git
+- docker pull kinsamanka/testing
+#- cp run.sh build_mk.sh machinekit 
 
 script:
 - docker run --privileged=true 
-    -v $(pwd)/machinekit:/opt/rootfs/usr/src/machinekit
-    kinsamanka/mkdocker:wheezy-32 /opt/rootfs/usr/src/machinekit/run.sh
+    -v $(pwd):/opt/rootfs/usr/src/tmp
+    kinsamanka/testing /opt/rootfs/usr/src/tmp/run2.sh
 
