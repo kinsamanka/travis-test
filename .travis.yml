@@ -9,7 +9,7 @@ install:
 - docker pull kinsamanka/mkdocker:wheezy-32
 
 env:
-#- CMD=build_debs.sh
+- CMD=build_debs.sh
 - CMD=run_tests.sh
 
 script:
