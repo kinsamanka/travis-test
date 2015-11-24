@@ -1,6 +1,6 @@
 #!/bin/sh -ex
 
-cd /usr/src/machinekit/src
+cd /usr/src/build/${MK_DIR}/machinekit/src
 
 ./autogen.sh
 

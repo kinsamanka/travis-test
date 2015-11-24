@@ -5,16 +5,18 @@ services:
 
 install:
 - git clone --depth 1 git://github.com/machinekit/machinekit.git
-- cp -a machinekit machinekit.1
 - docker pull kinsamanka/mkdocker:wheezy-32
+- docker pull kinsamanka/mkdocker:wheezy-64
 
 env:
-- CMD=build_debs.sh
-- CMD=run_tests.sh
+- TAG=wheezy-32 DIR=wheezy_32_bd CMD=build_debs.sh
+- TAG=wheezy-32 DIR=wheezy_32_rt CMD=run_tests.sh
+- TAG=wheezy-64 DIR=wheezy_64_bd CMD=build_debs.sh
+- TAG=wheezy-64 DIR=wheezy_64_rt CMD=run_tests.sh
 
 script:
 - docker run --privileged=true 
-    -v $(pwd):/opt/rootfs/usr/src
-    kinsamanka/mkdocker:wheezy-32 /opt/rootfs/usr/src/${CMD}
-- ls -ld *deb
+    -v $(pwd):/opt/rootfs/usr/src -e MK_DIR=${DIR}
+    kinsamanka/mkdocker:${TAG} /opt/rootfs/usr/src/${CMD}
+
 
