@@ -9,14 +9,14 @@ install:
 - docker pull kinsamanka/mkdocker:wheezy-64
 
 env:
-- TAG=wheezy-32 DIR=wheezy_32_bd CMD=build_debs.sh
-- TAG=wheezy-32 DIR=wheezy_32_rt CMD=run_tests.sh
-- TAG=wheezy-64 DIR=wheezy_64_bd CMD=build_debs.sh
-- TAG=wheezy-64 DIR=wheezy_64_rt CMD=run_tests.sh
+- TAG=wheezy-32 CMD=build_debs
+- TAG=wheezy-32 CMD=run_tests
+- TAG=wheezy-64 CMD=build_debs
+- TAG=wheezy-64 CMD=run_tests
 
 script:
 - docker run --privileged=true 
-    -v $(pwd):/opt/rootfs/usr/src -e MK_DIR=${DIR}
-    kinsamanka/mkdocker:${TAG} /opt/rootfs/usr/src/${CMD}
+    -v $(pwd):/opt/rootfs/usr/src -e MK_DIR=${TAG}_${CMD}
+    kinsamanka/mkdocker:${TAG} /opt/rootfs/usr/src/${CMD}.sh
 
 

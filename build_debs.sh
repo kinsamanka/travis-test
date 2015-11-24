@@ -8,4 +8,5 @@ proot -b /dev/shm -r /opt/rootfs \
 		 ./debian/configure -prx; \
 		 debuild -eDEB_BUILD_OPTIONS="parallel=2" -us -uc -b -j2'
 
+# print out the results
 ls -l /opt/rootfs/usr/src/build/${MK_DIR}/*deb || true

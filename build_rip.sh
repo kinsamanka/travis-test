@@ -13,6 +13,7 @@ cd /usr/src/build/${MK_DIR}/machinekit/src
 
 make -j2
 
+# needs this otherwise regression tests fails
 useradd mk
 chown -R mk:mk ../
 
