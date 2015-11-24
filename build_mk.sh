@@ -20,4 +20,4 @@ cat >../runtests.sh<<EOF
 runtests /usr/src/machinekit/tests
 EOF
 
-chmod a+x run.sh
+chmod a+x ../runtests.sh
