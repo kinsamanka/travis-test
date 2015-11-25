@@ -2,7 +2,7 @@
 
 PROOT_OPTS="-b /dev/shm -r ${ROOT}"
 if echo ${TAG} | grep -iq arm; then
-	PROOT_OPTS+="-q qemu-arm-static"
+	PROOT_OPTS="${PROOT_OPTS} -q qemu-arm-static"
 fi
 
 # copy source
