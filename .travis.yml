@@ -7,16 +7,29 @@ install:
 - git clone --depth 1 git://github.com/machinekit/machinekit.git
 - docker pull kinsamanka/mkdocker:wheezy-32
 - docker pull kinsamanka/mkdocker:wheezy-64
+- docker pull kinsamanka/mkdocker:wheezy-armhf
+#- docker pull kinsamanka/mkdocker:jessie-32
+#- docker pull kinsamanka/mkdocker:jessie-64
+#- docker pull kinsamanka/mkdocker:jessie-armhf
 
 env:
-- TAG=wheezy-32 CMD=build_debs
-- TAG=wheezy-32 CMD=run_tests
-- TAG=wheezy-64 CMD=build_debs
-- TAG=wheezy-64 CMD=run_tests
+  global:
+    - ROOT=/opt/rootfs
+    - JOBS=2
+  matrix:
+    - TAG=wheezy-64    CMD=run_tests
+    - TAG=wheezy-32    CMD=build_debs
+    - TAG=wheezy-64    CMD=build_debs
+    - TAG=wheezy-armhf CMD=build_debs
+#- TAG=jessie-64    CMD=run_tests
+#- TAG=jessie-32    CMD=build_debs
+#- TAG=jessie-64    CMD=build_debs
+#- TAG=jessie-armhf CMD=build_debs
 
 script:
 - docker run --privileged=true 
-    -v $(pwd):/opt/rootfs/usr/src -e MK_DIR=${TAG}_${CMD}
-    kinsamanka/mkdocker:${TAG} /opt/rootfs/usr/src/${CMD}.sh
+    -v $(pwd):${ROOT}/usr/src 
+    -e MK_DIR=${TAG}_${CMD} -e JOBS=${JOBS} -e TAG=${TAG} -e ROOT=${ROOT}
+    kinsamanka/mkdocker:${TAG} ${ROOT}/usr/src/${CMD}.sh
 
 

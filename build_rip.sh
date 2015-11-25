@@ -11,7 +11,7 @@ cd /usr/src/build/${MK_DIR}/machinekit/src
      --without-xenomai-kernel \
      --without-rtai-kernel
 
-make -j2
+make -j${JOBS}
 
 # needs this otherwise regression tests fails
 useradd mk
