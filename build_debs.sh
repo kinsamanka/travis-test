@@ -6,22 +6,24 @@ if echo ${TAG} | grep -iq arm; then
 fi
 
 case "${FLAVOR}" in
-   "posix") option="-p"
+   "posix") FLAVOR_OPTS="-p"
    ;;
-   "rt_preempt") option="-r" 
+   "rt_preempt") FLAVOR_OPTS="-r" 
    ;;
-   "xenomai") option="-x" 
+   "xenomai") FLAVOR_OPTS="-x" 
    ;;
-   *) option="-prx" 
+   *) FLAVOR_OPTS="-prx" 
    ;;
 esac
+
+export FLAVOR_OPTS
 
 proot ${PROOT_OPTS} -r ${ROOT} \
 	sh -exc 'cd /usr/src/; \
 		 mkdir -p build/${MK_DIR}; \
 		 cp -a machinekit build/${MK_DIR}; \
 		 cd build/${MK_DIR}/machinekit; \
-		 ./debian/configure ${option}; \
+		 ./debian/configure ${FLAVOR_OPTS}; \
 		 debuild -eDEB_BUILD_OPTIONS="parallel=${JOBS}" \
 		 	-us -uc -b -j${JOBS}'
 
