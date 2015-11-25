@@ -22,4 +22,8 @@ mount -o bind /dev /opt/rootfs/dev
 mount -o bind /dev/shm /opt/rootfs/dev/shm
 mount -o bind /dev/pts /opt/rootfs/dev/pts
 
-chroot --userspec=mk:mk ${ROOT} /usr/src/runtests.sh 
+chroot --userspec=mk:mk ${ROOT} /usr/src/runtests.sh | \
+	tee ${ROOT}/usr/src/build/${MK_DIR}/output.log
+
+# cleanup
+rm ${ROOT}/usr/src/build/${MK_DIR}/machinekit

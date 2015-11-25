@@ -18,4 +18,3 @@ useradd mk
 chown -R mk:mk ../
 
 make setuid
-

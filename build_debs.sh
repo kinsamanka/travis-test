@@ -1,31 +1,20 @@
 #!/bin/sh -ex
 
-PROOT_OPTS="-b /dev/shm -r ${ROOT}"
-if echo ${TAG} | grep -iq arm; then
-	PROOT_OPTS="${PROOT_OPTS} -q qemu-arm-static"
+# build unsinged packages
+DEBUILD_OPTS="-eDEB_BUILD_OPTIONS="parallel=${JOBS}" -us -uc -j${JOBS}"
+
+# build source debs only on amd64
+if !(echo ${TAG} | grep -q 64); then
+	DEBUILD_OPTS="${DEBUILD_OPTS} -b"
 fi
 
-case "${FLAV}" in
-   "posix") FLAV_OPTS="-p"
-   ;;
-   "rt_preempt") FLAV_OPTS="-r" 
-   ;;
-   "xenomai") FLAV_OPTS="-x" 
-   ;;
-   *) FLAV_OPTS="-prx" 
-   ;;
-esac
+# copy source
+cp -a /usr/src/machinekit /usr/src/build/${MK_DIR}
 
-export FLAV_OPTS
+# build debs
+cd /usr/src/build/${MK_DIR}/machinekit
+./debian/configure ${FLAV_OPTS}
+debuild ${DEBUILD_OPTS}
 
-proot ${PROOT_OPTS} -r ${ROOT} \
-	sh -exc 'cd /usr/src/; \
-		 mkdir -p build/${MK_DIR}; \
-		 cp -a machinekit build/${MK_DIR}; \
-		 cd build/${MK_DIR}/machinekit; \
-		 ./debian/configure ${FLAV_OPTS}; \
-		 debuild -eDEB_BUILD_OPTIONS="parallel=${JOBS}" \
-		 	-us -uc -b -j${JOBS}'
-
-# print out the results
-ls -l ${ROOT}/usr/src/build/${MK_DIR}/*deb || true
+# cleanup
+rm -rf cd /usr/src/build/${MK_DIR}/machinekit
