@@ -26,4 +26,4 @@ chroot --userspec=mk:mk ${ROOT} /usr/src/runtests.sh | \
 	tee ${ROOT}/usr/src/build/${MK_DIR}/output.log
 
 # cleanup
-rm ${ROOT}/usr/src/build/${MK_DIR}/machinekit
+rm -rf ${ROOT}/usr/src/build/${MK_DIR}/machinekit

@@ -17,4 +17,4 @@ cd /usr/src/build/${MK_DIR}/machinekit
 debuild ${DEBUILD_OPTS}
 
 # cleanup
-rm -rf cd /usr/src/build/${MK_DIR}/machinekit
+rm -rf /usr/src/build/${MK_DIR}/machinekit
