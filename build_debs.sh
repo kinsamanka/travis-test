@@ -14,7 +14,7 @@ cp -a /usr/src/machinekit /usr/src/build/${MK_DIR}
 # build debs
 cd /usr/src/build/${MK_DIR}/machinekit
 ./debian/configure ${FLAV_OPTS}
-debuild ${DEBUILD_OPTS}
+yes|debuild ${DEBUILD_OPTS}
 
 # cleanup
 rm -rf /usr/src/build/${MK_DIR}/machinekit
