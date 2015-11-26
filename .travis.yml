@@ -3,7 +3,7 @@ language: bash
 services:
 - docker
 
-install:
+before_install:
 - docker pull kinsamanka/mkdocker:wheezy-32
 - docker pull kinsamanka/mkdocker:wheezy-64
 - docker build -t mk_data .
