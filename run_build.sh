@@ -23,4 +23,4 @@ proot ${PROOT_OPTS} /usr/src/build_debs.sh | \
 	tee ${ROOT}/usr/src/build/${MK_DIR}/output.log
 
 # print out the results
-ls -l ${ROOT}/usr/src/build/${MK_DIR}/*deb || true
+ls -l ${ROOT}/usr/src/build/${MK_DIR}/*deb
