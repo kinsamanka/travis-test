@@ -3,35 +3,6 @@ language: bash
 services:
 - docker
 
-install:
-- git clone --depth 1 git://github.com/machinekit/machinekit.git
-- docker pull kinsamanka/mkdocker:wheezy-32
-- docker pull kinsamanka/mkdocker:wheezy-64
-- docker pull kinsamanka/mkdocker:wheezy-armhf
-#- docker pull kinsamanka/mkdocker:jessie-32
-#- docker pull kinsamanka/mkdocker:jessie-64
-#- docker pull kinsamanka/mkdocker:jessie-armhf
-
-env:
-  global:
-    - ROOT=/opt/rootfs
-    - JOBS=2
-  matrix:
-    - TAG=wheezy-64    CMD=run_tests
-    - TAG=wheezy-32    CMD=run_build
-    - TAG=wheezy-64    CMD=run_build
-    - TAG=wheezy-armhf CMD=run_build FLAV=posix
-    - TAG=wheezy-armhf CMD=run_build FLAV=rt_preempt
-    - TAG=wheezy-armhf CMD=run_build FLAV=xenomai
-#- TAG=jessie-64    CMD=run_tests
-#- TAG=jessie-32    CMD=run_build
-#- TAG=jessie-64    CMD=run_build
-#- TAG=jessie-armhf CMD=run_build FLAV=posix
-#- TAG=jessie-armhf CMD=run_build FLAV=rtpreempt
-#- TAG=jessie-armhf CMD=run_build FLAV=xenomai
-
 script:
-- docker run --privileged=true 
-    -v $(pwd):${ROOT}/usr/src -e FLAV="${FLAV}"
-    -e MK_DIR=${TAG}_${CMD} -e JOBS=${JOBS} -e TAG=${TAG} -e ROOT=${ROOT}
-    kinsamanka/mkdocker:${TAG} ${ROOT}/usr/src/${CMD}.sh
+- docker build -t mk_runtest test
+- docker run -e MACHINEKIT_PATH=/usr/src/machinekit --rm=true mk_runtest /run_tests.sh
