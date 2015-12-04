@@ -1,5 +1,5 @@
 script:
-- 'openssl aes-256-cbc -K $encrypted_f45b3652c5fe_key -iv $encrypted_f45b3652c5fe_iv -in id_rsa.enc -out id_rsa -d'
+- openssl aes-256-cbc -K $encrypted_f47b3652c5fe_key -iv $encrypted_f45b3652c5fe_iv -in id_rsa.enc -out id_rsa -d
 - ls -l > ab
 - chmod a+rw ab
 - sftp -i id_rsa -P 9022 -oBatchMode=no -b - mktravis@deb.mah.priv.at << !
