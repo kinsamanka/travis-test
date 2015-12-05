@@ -1,6 +1,8 @@
 script:
-- curl http://deb.mah.priv.at/travis/access_key.enc -o access_key.enc
+- curl http://deb.mah.priv.at/travis/kinsamanka.travis-test_access_key.enc -o access_key.enc
 - "openssl aes-256-cbc -K $encrypted_sftp_key -iv $encrypted_sftp_iv -in access_key.enc -out ~/access_key -d"
 - chmod 0600 ~/access_key
 - ./send.sh
+deploy:
+- false
 
