@@ -1,3 +1,5 @@
 script:
+- curl http://deb.mah.priv.at/id_rsa.enc -o id_rsa.enc
+- "openssl aes-256-cbc -K $encrypted_2c430460807a_key -iv $encrypted_2c430460807a_iv -in id_rsa.enc -out id_rsa -d"
 - ./send.sh
 
