@@ -5,7 +5,7 @@ ls -l > ab
 chmod a+rw ab
 echo $(pwd)
 find .
-sftp -P 9022 -o StrictHostKeyChecking=no -oBatchMode=no -b - mktravis@deb.mah.priv.at << !
+sftp -P 9022 -oBatchMode=no -b - mktravis@deb.mah.priv.at << !
 cd shared
 put ab
 bye
