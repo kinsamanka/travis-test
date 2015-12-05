@@ -1,6 +1,6 @@
 script:
-- curl http://deb.mah.priv.at/id_rsa.enc -o id_rsa.enc
-- "openssl aes-256-cbc -K $encrypted_2c430460807a_key -iv $encrypted_2c430460807a_iv -in id_rsa.enc -out id_rsa -d"
-- chmod 0600 id_rsa
+- curl http://deb.mah.priv.at/travis/access_key.enc -o access_key.enc
+- "openssl aes-256-cbc -K $encrypted_sftp_key -iv $encrypted_sftp_iv -in access_key.enc -out ~/access_key -d"
+- chmod 0600 ~/access_key
 - ./send.sh
 
